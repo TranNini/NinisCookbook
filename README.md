@@ -2,7 +2,7 @@
 
 Offline web app (PWA) in plain HTML, CSS and JavaScript. No build step.
 
-Files: `index.html` (whole app), `sw.js` (offline cache), `manifest.webmanifest`, icons.
+Files: `index.html` (whole app), `sw.js` (offline cache), `manifest.webmanifest`, icons (home screen, browser tab, splash screen).
 
 - Data lives on the device in IndexedDB (`ninis-cookbook` database: `recipes`, `items`, `meta`).
 - Photos are center-cropped to 720×720 JPEG and stored as data URLs inside the recipe.
