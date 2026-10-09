@@ -1,5 +1,7 @@
 # Nini's Cookbook
 
+https://trannini.github.io/NinisCookbook/
+
 Offline web app (PWA) in plain HTML, CSS and JavaScript. No build step.
 
 Files: `index.html` (whole app), `sw.js` (offline cache), `manifest.webmanifest`, icons (home screen, browser tab, splash screen).
