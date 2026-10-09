@@ -1,5 +1,5 @@
 // Offline cache for Nini's Cookbook. Bump VERSION when any file changes.
-const VERSION = "cookbook-v7";
+const VERSION = "cookbook-v8";
 const FILES = ["./", "index.html", "manifest.webmanifest", "icon-tab.png", "icon-180.png", "icon-192.png", "icon-512.png", "icon-maskable-512.png"];
 
 self.addEventListener("install", (e) => {
