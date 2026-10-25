@@ -1,0 +1,23 @@
+target/
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### App data: the database (recipes, photos, shopping list) and its backups ###
+cookbook.db
+backups/
+
+### Web app access code ###
+access-code.txt
+
+### Notes for Claude, kept only locally ###
+CLAUDE.md

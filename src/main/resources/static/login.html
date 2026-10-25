@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Nini's Cookbook</title>
+<meta name="theme-color" content="#25479E">
+<link rel="manifest" href="manifest.webmanifest?v=9">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=9">
+<link rel="icon" type="image/png" sizes="64x64" href="icon-tab.png?v=7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cookbook">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@600&family=Figtree:wght@400;600&display=swap">
+<style>
+/* The same colors and type as index.html */
+:root{
+  --bg:#F5F6F2; --surface:#ffffff; --line:#D7DCE6; --fg:#17203A; --muted:#5D667C;
+  --accent:#25479E; --accent-fg:#ffffff; --danger:#B8334B;
+  --shadow:0 1px 2px rgba(23,32,58,.06),0 4px 14px rgba(23,32,58,.06);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1424; --surface:#151C30; --line:#2A3352; --fg:#E8ECF6; --muted:#A3ACC2;
+  --accent:#8AA6F2; --accent-fg:#0E1424; --danger:#F0899B;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25); color-scheme:dark;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 "Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:420px;margin:0 auto;padding:calc(48px + env(safe-area-inset-top,0px)) 16px 32px}
+h1,h2{font-family:"Vollkorn",Georgia,"Times New Roman",serif;font-weight:600;margin:0;line-height:1.2}
+h1{font-size:1.75rem;margin-bottom:20px}
+h2{font-size:1.25rem}
+form{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px;display:grid;gap:14px}
+p{margin:0;color:var(--muted)}
+.error{color:var(--danger)}
+input{font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-height:48px;width:100%}
+input:focus{outline:2px solid var(--accent);outline-offset:1px}
+button{font:inherit;font-weight:600;border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);border-radius:999px;padding:10px 18px;min-height:48px;cursor:pointer}
+</style>
+</head>
+<body>
+<main>
+  <h1>Nini's Cookbook</h1>
+  <form method="post" action="/login" autocomplete="off">
+    <h2>Access code</h2>
+    <p>Enter your cookbook access code. You only need to do this once on this device.</p>
+    <p id="wrong" class="error" hidden>That code didn't work. Please check it and try again.</p>
+    <input id="code" name="code" type="text" aria-label="Code" autocapitalize="off" autocorrect="off" spellcheck="false" autofocus>
+    <button type="submit">Continue</button>
+  </form>
+</main>
+<script>
+  document.getElementById("wrong").hidden = !location.search.includes("wrong");
+</script>
+</body>
+</html>
