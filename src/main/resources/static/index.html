@@ -66,6 +66,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:600;text-wrap:balance;margi
 .btn svg{width:18px;height:18px;flex:none}
 .btn-row{display:flex;flex-wrap:wrap;gap:10px}
 .link-btn{border:0;background:none;color:var(--accent);font-weight:600;cursor:pointer;padding:8px 4px;min-height:var(--tap)}
+.link-btn.danger{color:var(--danger)}
 
 /* search */
 .search{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:4px 10px}
@@ -412,7 +413,7 @@ function viewShopping() {
   let list;
   if (!S.items.length) list = `<div class="empty"><h2>Your list is empty</h2><p>Add items above, or open a recipe and tap “Add all ingredients to shopping list”.</p></div>`;
   else list = `<ul class="shop">${open.map(itemHtml).join("")}</ul>` + (done.length ? `<div class="divider"><span>In the basket · ${done.length}</span><button class="link-btn" data-act="clear-checked">Remove checked items</button></div><ul class="shop">${done.map(itemHtml).join("")}</ul>` : "");
-  return `<div class="top"><h1>Shopping list</h1></div>
+  return `<div class="top"><h1>Shopping list</h1>${S.items.length ? `<button class="link-btn danger" data-act="clear-all">Clear list</button>` : ""}</div>
     <form class="add-item" id="add-form"><input class="field" id="new-item" placeholder="Add an item" autocomplete="off" aria-label="New item"><button class="btn primary" type="submit" aria-label="Add item">${I.plus}Add</button></form>
     ${list}`;
 }
@@ -576,6 +577,14 @@ async function removeItems(list, msg) {
   toast(msg, async () => { S.items.push(...list); await store.putMany("items", list); render(); });
 }
 
+function clearList() {
+  const all = [...S.items];
+  const n = all.length;
+  dialog({ title: "Clear the shopping list?", text: "All " + n + (n === 1 ? " item" : " items") + " will be removed, checked or not.", buttons: [
+    { label: "Cancel" },
+    { label: "Clear list", cls: "danger solid", run: () => removeItems(all, "Shopping list cleared") }] });
+}
+
 /* ---------- photo ---------- */
 function loadImage(file) {
   return new Promise((resolve, reject) => {
@@ -708,6 +717,7 @@ app.addEventListener("click", (e) => {
     case "toggle": toggleItem(itemId); break;
     case "edit-item": S.editingItem = itemId; render(); { const f = $("#edit-item"); if (f) { f.focus(); f.select(); } } break;
     case "del-item": { const it = S.items.find((i) => i.id === itemId); if (it) removeItems([it], "Item deleted"); } break;
+    case "clear-all": clearList(); break;
     case "clear-checked": { const done = S.items.filter((i) => i.checked); removeItems(done, done.length + (done.length === 1 ? " item removed" : " items removed")); } break;
     case "backup-now": saveBackup(); break;
     case "restore": $("#restore-input").click(); break;
